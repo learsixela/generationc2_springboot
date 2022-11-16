@@ -1,5 +1,8 @@
 package cl.generation.web.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +54,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return "Usuario no actualizado";
 	}
 
+	@Override
+	public Usuario obtenerUsuario(Long id) {
+		//Optional<Usuario> user = usuarioRepository.findById(id);
+		Boolean existe = usuarioRepository.existsById(id);
+		
+		if(existe) {
+		Usuario user= usuarioRepository.findById(id).get();
+			return user;
+		}
+		return null;
+	}
+	//listar todos los usuarios
+	@Override
+	public List<Usuario> obtenerListaUsuarios() {
+		// obtener todos los usuarios
+		return usuarioRepository.findAll();
+	}
+
+
+	
+	
 
 }
