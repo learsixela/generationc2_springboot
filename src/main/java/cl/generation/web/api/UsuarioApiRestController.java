@@ -37,7 +37,12 @@ public class UsuarioApiRestController {
 	}
 
 	@RequestMapping("/actualizar/usuario")
-	public Usuario actualizarUsuario(@RequestBody Usuario usuario) {
-		return usuarioServiceImpl.guardarUsuario(usuario);
+	public String actualizarUsuario(@RequestBody Usuario usuario) {
+		//validacion logica
+		if(usuario.getId()!=null) {
+			String mensaje = usuarioServiceImpl.actualizarUsuario(usuario);
+			return mensaje;
+		}
+		return null;
 	}
 }
