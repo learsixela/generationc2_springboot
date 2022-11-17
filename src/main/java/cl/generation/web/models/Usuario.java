@@ -20,6 +20,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -36,7 +38,9 @@ public class Usuario {
 	@NotNull
 	private String password;
 	
+
 	//relacion OneToOne
+	@JsonIgnore
 	@OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Auto auto;
 

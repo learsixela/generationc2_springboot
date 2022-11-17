@@ -28,4 +28,10 @@ public class AutoApiRestController {
 		
 		return autoServiceImpl.guardarAuto(auto);
 	}
+	
+	@RequestMapping("/obtener/auto")
+	public Auto obtenerUsuario(@RequestParam(value="id",required = true) Long id) {
+		
+		return autoServiceImpl.obtenerAuto(id);
+	}
 }
