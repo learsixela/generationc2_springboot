@@ -72,6 +72,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioRepository.findAll();
 	}
 
+	@Override
+	public Optional<Usuario> obtenerDatosUsuario(Long id) {
+		Optional<Usuario> mensaje = usuarioRepository.findById(id);
+		return mensaje;
+	}
+
 
 	
 	

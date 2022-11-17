@@ -2,11 +2,14 @@ package cl.generation.web.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -32,6 +35,10 @@ public class Usuario {
 	private String correo;
 	@NotNull
 	private String password;
+	
+	//relacion OneToOne
+	@OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private Auto auto;
 
 	@Transient
 	private String password2;
@@ -107,6 +114,14 @@ public class Usuario {
 
 	public void setPeso(Float peso) {
 		this.peso = peso;
+	}
+
+	public Auto getAuto() {
+		return auto;
+	}
+
+	public void setAuto(Auto auto) {
+		this.auto = auto;
 	}
 
 	// atributos de control 

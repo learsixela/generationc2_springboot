@@ -1,6 +1,7 @@
 package cl.generation.web.api;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +54,14 @@ public class UsuarioApiRestController {
 		
 		return usuarioServiceImpl.obtenerUsuario(id);
 	}
-	
+	// ahora obtenemos el usuario a partir del id
+		// http://localhost:8080/obtenerdato/usuario
+		@RequestMapping("/obtenerdato/usuario")
+		public Optional<Usuario> obtenerDatosUsuario(@RequestParam(value = "id", required = true) Long id) {
+				
+			return usuarioServiceImpl.obtenerDatosUsuario(id);
+		}
+		
 	//listar todos los usuarios
 	@GetMapping("/listar/usuarios")
 	public List<Usuario> obtenerListaUsuarios(){
