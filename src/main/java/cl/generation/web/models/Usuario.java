@@ -47,7 +47,7 @@ public class Usuario {
 	private Auto auto;
 	
 	//relacion OneToMany
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Direccion> direcciones;
 
