@@ -16,7 +16,6 @@ public class AutoServiceImpl implements AutoService{
 		return autoRepository.save(auto);
 	}
 	public Auto obtenerAuto(Long id) {
-		// TODO Auto-generated method stub
 		return autoRepository.findById(id).get();
 	}
 

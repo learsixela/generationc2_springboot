@@ -1,6 +1,7 @@
 package cl.generation.web.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -40,9 +42,14 @@ public class Usuario {
 	
 
 	//relacion OneToOne
-	@JsonIgnore
+	@JsonIgnore //permite eliminar error de recursividad
 	@OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Auto auto;
+	
+	//relacion OneToMany
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<Direccion> direcciones;
 
 	@Transient
 	private String password2;
