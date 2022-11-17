@@ -134,7 +134,13 @@ public class Usuario {
 	public void setAuto(Auto auto) {
 		this.auto = auto;
 	}
+	public List<Direccion> getDirecciones() {
+		return direcciones;
+	}
 
+	public void setDirecciones(List<Direccion> direcciones) {
+		this.direcciones = direcciones;
+	}
 	// atributos de control 
 	// agregar a la columna la fecha antes de insertar
 	@PrePersist
