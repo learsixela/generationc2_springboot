@@ -15,5 +15,4 @@ RolRepository rolRepository;
 	public Rol obtenerRol(Long id) {
 		return rolRepository.findById(id).get();
 	}
-
 }

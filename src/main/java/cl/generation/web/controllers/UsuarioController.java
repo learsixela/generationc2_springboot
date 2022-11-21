@@ -3,6 +3,8 @@ package cl.generation.web.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cl.generation.web.models.Rol;
+
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -25,5 +27,14 @@ public class UsuarioController {
 	public String ipalma() {
 		System.out.println("en el metodo de israel");
 		return "";
+	}
+	
+	@RequestMapping("/rol")
+	public Rol obtenerRol() {
+		Rol rol = new Rol();
+		rol.setNombre("ADMIN");
+		rol.setDescripcion("Administra el sistema");
+		System.out.println("");
+		return rol;
 	}
 }
