@@ -3,6 +3,7 @@ package cl.generation.web.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +17,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	
 	@Override
-	public Usuario guardarUsuario(Usuario usuario) {
+	public Boolean guardarUsuario(Usuario usuario) {
 		
 		//validar el usuario (email)
+		Usuario retornoUsuario = usuarioRepository.findByCorreo(usuario.getCorreo());
 		
-		
-		return usuarioRepository.save(usuario);
+		if(retornoUsuario == null) {
+			//1234 -> 1231245321425fas4352
+			String passHashed = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
+			//reemplazando el valor por el hash
+			usuario.setPassword(passHashed);		
+			
+			usuarioRepository.save(usuario);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override

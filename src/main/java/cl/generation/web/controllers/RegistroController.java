@@ -48,10 +48,13 @@ public class RegistroController {
 			usuario.setNick(nick);
 			usuario.setPassword2(pass2);
 			//enviar a base datos
-			usuarioServiceImpl.guardarUsuario(usuario);
-			
-			
-			return "index.jsp"; //enviar a una vista
+			Boolean resultado = usuarioServiceImpl.guardarUsuario(usuario);
+			if(resultado) {//si es verdadero
+				return "index.jsp"; //enviar a una vista
+			}else {
+				model.addAttribute("msgError" ,"Email ya registrado" );
+				return "registro.jsp";
+			}	
 		}else {
 			model.addAttribute("msgError" ,"Password distintos" );
 			return "registro.jsp";
