@@ -18,6 +18,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario guardarUsuario(Usuario usuario) {
 		
+		//validar el usuario (email)
+		
+		
 		return usuarioRepository.save(usuario);
 	}
 

@@ -39,6 +39,12 @@ public class Usuario {
 	private String nombre;
 
 	@NotNull
+	@Size(min = 3, max = 15, message = "Error en el ingreso del apellido")
+	private String apellido;
+	
+
+
+	@NotNull
 	private String correo;
 	@NotNull
 	private String password;
@@ -160,6 +166,13 @@ public class Usuario {
 
 	public void setDirecciones(List<Direccion> direcciones) {
 		this.direcciones = direcciones;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 	// atributos de control 
 	// agregar a la columna la fecha antes de insertar
