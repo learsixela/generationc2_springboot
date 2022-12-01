@@ -28,7 +28,7 @@
     
 	    <div class="card">
 		  <div class="card-body">
-		    <form action="/registro/formulario" method="post">
+		    <form action="/registro/usuario" method="post">
 		        <label for="nombre" class="form-label">Nombre:</label>
 		        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa nombre">
 		        <br>
@@ -48,6 +48,7 @@
 		        <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Ingrese password">
 		        <br>
 		        <input type="submit" class="btn btn-outline-primary btn-lg" value="Enviar">
+		        <a class="btn btn-primary" href="/registro/login" role="button">Login</a>
 		    </form>
 		  </div>
 		</div>

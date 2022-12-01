@@ -23,7 +23,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario retornoUsuario = usuarioRepository.findByCorreo(usuario.getCorreo());
 		
 		if(retornoUsuario == null) {
-			//1234 -> 1231245321425fas4352
+			//1234 -> $1231245321425fas4352
 			String passHashed = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
 			//reemplazando el valor por el hash
 			usuario.setPassword(passHashed);		
@@ -90,6 +90,27 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Optional<Usuario> obtenerDatosUsuario(Long id) {
 		Optional<Usuario> mensaje = usuarioRepository.findById(id);
 		return mensaje;
+	}
+
+	@Override
+	public Boolean ingresoUsuario(String email, String password) {
+		System.out.println(email +" "+password);
+		Usuario usuario = usuarioRepository.findByCorreo(email);
+		if(usuario!= null) {//existe el usuario
+			//return BCrypt.checkpw(password,usuario.getPassword());
+			
+			//comparar contraseñas
+			boolean resultadoPwd = BCrypt.checkpw(password,usuario.getPassword());
+			
+			if(resultadoPwd) {//resultadoPwd == true; son iguales-> 
+				return true;
+			}else {//resultadoPwd == false; password distintas
+				return false;
+			}
+
+		}else {//no existe el email en bd
+			return false;
+		}
 	}
 
 
