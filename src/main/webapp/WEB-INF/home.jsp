@@ -56,8 +56,8 @@
                             <a class="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form action="/home/nav" method="post" class="d-flex" role="search">
+                        <input class="form-control me-2" name="marca" type="search" placeholder="Search" aria-label="Search" >
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -67,15 +67,18 @@
         <div>
             <h1>Hello, world!</h1>
 
-            <label for="autoSeleccioando" class="form-label">Auto</label>
-           	<select class="form-select" aria-label="lista de autos" name="autoSeleccioando" id="autoSeleccioando">
+		<form action="/home" method="post">
+            <label for="autoSeleccionado" class="form-label">Auto</label>
+           	<select class="form-select" aria-label="lista de autos" name="autoSeleccionado" id="autoSeleccionado">
 			  <option value="0" selected>Seleccione su auto</option>
-			  <c:forEach var="auto" items="${autos}">
+			  <c:forEach var="auto" items="${listaSelectAutos}">
 			  	<option value="${auto.id}">${auto.marca} - ${auto.color}</option>
 			  </c:forEach>
 			</select>
             <br>
-            <button type="button" class="btn btn-outline-secondary">Filtrar Auto</button>
+            <button type="submit" class="btn btn-outline-secondary">Filtrar Auto</button>
+         </form>
+            
             <br> <br>
             <h2>Lista de autos</h2>
             <table class="table">

@@ -8,5 +8,9 @@ import cl.generation.web.models.Usuario;
 
 @Repository
 public interface AutoRepository extends JpaRepository<Auto, Long>{
+
+	Auto findByMarca(String marca);
+
+
 	//logica de manipulacion de datos (CRUD+)
 }

@@ -17,6 +17,7 @@ public class AutoServiceImpl implements AutoService{
 	public Auto guardarAuto(Auto auto) {
 		return autoRepository.save(auto);
 	}
+	@Override
 	public Auto obtenerAuto(Long id) {
 		return autoRepository.findById(id).get();
 	}
@@ -25,5 +26,12 @@ public class AutoServiceImpl implements AutoService{
 	public List<Auto> listarAutos() {
 		return autoRepository.findAll();
 	}
+	
+	@Override
+	public Auto obtenerAutoNombre(String marca) {
+		
+		return autoRepository.findByMarca(marca);
+	}
+
 
 }
