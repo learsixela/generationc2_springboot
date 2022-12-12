@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
@@ -67,41 +67,39 @@
         <div>
             <h1>Hello, world!</h1>
 
-            <label for="nombre" class="form-label">Nombre</label>
-            <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre">
+            <label for="autoSeleccioando" class="form-label">Auto</label>
+           	<select class="form-select" aria-label="lista de autos" name="autoSeleccioando" id="autoSeleccioando">
+			  <option value="0" selected>Seleccione su auto</option>
+			  <c:forEach var="auto" items="${autos}">
+			  	<option value="${auto.id}">${auto.marca} - ${auto.color}</option>
+			  </c:forEach>
+			</select>
             <br>
-            <button type="button" class="btn btn-outline-secondary">Secondary</button>
+            <button type="button" class="btn btn-outline-secondary">Filtrar Auto</button>
             <br> <br>
-            <h2>Usuarios</h2>
+            <h2>Lista de autos</h2>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Correo</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">USUARIO</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    <c:forEach  var="auto" items="${autos}">
+                    	<tr>
+                    		<td>${auto.id}</td>
+                    		<td>${auto.marca}</td>
+                    		<td>${auto.color}</td>
+                    		<td>${auto.usuario.nombre} ${auto.usuario.apellido}</td>
+                    	</tr>
+                    </c:forEach>
                 </tbody>
             </table>
+            <br>
+
         </div>
 
 

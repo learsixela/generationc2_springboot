@@ -1,5 +1,7 @@
 package cl.generation.web.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class AutoServiceImpl implements AutoService{
 	}
 	public Auto obtenerAuto(Long id) {
 		return autoRepository.findById(id).get();
+	}
+	
+	@Override
+	public List<Auto> listarAutos() {
+		return autoRepository.findAll();
 	}
 
 }
