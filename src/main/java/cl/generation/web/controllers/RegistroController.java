@@ -1,5 +1,7 @@
 package cl.generation.web.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,8 +74,6 @@ public class RegistroController {
 			model.addAttribute("msgError" ,"Password distintos" );
 			return "registro.jsp";
 		}
-		
-		
 	}
 	
 	
@@ -87,12 +87,22 @@ public class RegistroController {
 	@PostMapping("/login")
 	public String ingresoUsuario(@RequestParam("email") String email,
 			@RequestParam("pass") String pass,
-			Model model) {
+			Model model,
+			HttpSession session) {
 		//System.out.println(email +" "+pass);
 		//llamando al metodo
 		Boolean resultadoLogin = usuarioServiceImpl.ingresoUsuario(email, pass);
 		
 		if(resultadoLogin) {//resultadoLogin == true, login correcto
+			
+			Usuario usuario = usuarioServiceImpl.obtenerUsuarioEmail(email);
+			
+			//guardar informacion en session
+			session.setAttribute("usuarioId", usuario.getId());
+			session.setAttribute("usuarioEmail", email);
+			session.setAttribute("usuarioRol", usuario.getRoles());
+
+			
 			//ir a una ruta interna http://localhost:8080/home
 			return "redirect:/home";
 		}else {
@@ -101,14 +111,5 @@ public class RegistroController {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

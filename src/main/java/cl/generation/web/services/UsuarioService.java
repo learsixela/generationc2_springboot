@@ -15,4 +15,5 @@ public interface UsuarioService {
 	public List<Usuario> obtenerListaUsuarios();
 	//login
 	public Boolean ingresoUsuario(String email, String password);
+	public Usuario obtenerUsuarioEmail(String email);
 }

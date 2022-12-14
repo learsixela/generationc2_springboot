@@ -3,6 +3,8 @@ package cl.generation.web.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,16 +24,23 @@ public class HomeController {
 	
 //localhost:9080/home
 	@GetMapping("")
-	public String home(Model model) {
+	public String home(Model model, HttpSession session) {
 		
-		//obtener y almacenar en variable
-		List<Auto> listaAutos= autoServiceImpl.listarAutos();
-		//pasar lista de autos al jsp
-		model.addAttribute("autos", listaAutos);
-		//lista para el selector
-		List<Auto> listaSelectAutos= autoServiceImpl.listarAutos();
-		model.addAttribute("listaSelectAutos", listaSelectAutos);
-		return "home.jsp";
+		if(session.getAttribute("usuarioId")!=null) {
+			//obtener y almacenar en variable
+			List<Auto> listaAutos= autoServiceImpl.listarAutos();
+			//pasar lista de autos al jsp
+			model.addAttribute("autos", listaAutos);
+			//lista para el selector
+			List<Auto> listaSelectAutos= autoServiceImpl.listarAutos();
+			model.addAttribute("listaSelectAutos", listaSelectAutos);
+			return "home.jsp";
+			
+		}else {
+			return "redirect:/registro/login";
+		}
+		
+		
 	}
 	
 	//localhost:9080/home -> post, solo respondera a formularios
