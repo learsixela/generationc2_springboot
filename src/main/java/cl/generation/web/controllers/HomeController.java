@@ -27,6 +27,10 @@ public class HomeController {
 	public String home(Model model, HttpSession session) {
 		
 		if(session.getAttribute("usuarioId")!=null) {
+			
+			String email = (String) session.getAttribute("usuarioEmail");
+			Long usuarioId = (Long) session.getAttribute("usuarioId");
+			
 			//obtener y almacenar en variable
 			List<Auto> listaAutos= autoServiceImpl.listarAutos();
 			//pasar lista de autos al jsp
