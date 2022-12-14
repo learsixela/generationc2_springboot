@@ -101,7 +101,7 @@ public class RegistroController {
 			session.setAttribute("usuarioId", usuario.getId());
 			session.setAttribute("usuarioEmail", email);
 			session.setAttribute("usuarioRol", usuario.getRoles());
-
+			session.setAttribute("usuarioNombre", usuario.getNombre()+" " + usuario.getApellido());
 			
 			//ir a una ruta interna http://localhost:8080/home
 			return "redirect:/home";
@@ -110,6 +110,15 @@ public class RegistroController {
 			return "login.jsp";
 		}
 
+	}
+	
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		if(session.getAttribute("usuarioId")!=null) {
+			session.invalidate();
+		}
+		return "redirect:/registro/login";
 	}
 	
 }

@@ -28,8 +28,10 @@ public class HomeController {
 		
 		if(session.getAttribute("usuarioId")!=null) {
 			
+			//capturando variables de session
 			String email = (String) session.getAttribute("usuarioEmail");
 			Long usuarioId = (Long) session.getAttribute("usuarioId");
+			String nombre = (String) session.getAttribute("usuarioNombre");
 			
 			//obtener y almacenar en variable
 			List<Auto> listaAutos= autoServiceImpl.listarAutos();
@@ -38,6 +40,8 @@ public class HomeController {
 			//lista para el selector
 			List<Auto> listaSelectAutos= autoServiceImpl.listarAutos();
 			model.addAttribute("listaSelectAutos", listaSelectAutos);
+			
+			model.addAttribute("usuarioNombre", nombre);
 			return "home.jsp";
 			
 		}else {
