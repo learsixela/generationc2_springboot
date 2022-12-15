@@ -118,6 +118,7 @@ public class RegistroController {
 		if(session.getAttribute("usuarioId")!=null) {
 			session.invalidate();
 		}
+		
 		return "redirect:/registro/login";
 	}
 	
