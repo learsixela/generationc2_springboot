@@ -41,13 +41,14 @@ public class Usuario {
 	@NotNull
 	@Size(min = 3, max = 15, message = "Error en el ingreso del apellido")
 	private String apellido;
-	
-
 
 	@NotNull
 	private String correo;
 	@NotNull
 	private String password;
+	
+	@Column(name="foto", length= Integer.MAX_VALUE,nullable= true)
+	private byte[] foto;
 	
 
 	//relacion OneToOne
@@ -174,6 +175,14 @@ public class Usuario {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
 	// atributos de control 
 	// agregar a la columna la fecha antes de insertar
 	@PrePersist

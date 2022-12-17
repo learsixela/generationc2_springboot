@@ -67,7 +67,7 @@
 	                                
 	                            </a>
 	                         <ul class="dropdown-menu">
-	                        <li><a class="dropdown-item" href="/usuario/editar">Editar</a></li>
+	                        <li><a class="dropdown-item" href="#">Editar</a></li>
 	                        <li><a class="dropdown-item" href="#">Another action</a></li>
 	                        <li>
 	                            <hr class="dropdown-divider">
@@ -81,43 +81,32 @@
         </nav><br>
         <!--contenido-->
         <div>
-            <h1>Hello, world!</h1>
+            <h1>Actualizar datos de perfil</h1>
 
-		<form action="/home" method="post">
-            <label for="autoSeleccionado" class="form-label">Auto</label>
-           	<select class="form-select" aria-label="lista de autos" name="autoSeleccionado" id="autoSeleccionado">
-			  <option value="0" selected>Seleccione su auto</option>
-			  <c:forEach var="auto" items="${listaSelectAutos}">
-			  	<option value="${auto.id}">${auto.marca} - ${auto.color}</option>
-			  </c:forEach>
-			</select>
-            <br>
-            <button type="submit" class="btn btn-outline-secondary">Filtrar Auto</button>
-         </form>
-            
-            <br> <br>
-            <h2>Lista de autos</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">USUARIO</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach  var="auto" items="${autos}">
-                    	<tr>
-                    		<td>${auto.id}</td>
-                    		<td>${auto.marca}</td>
-                    		<td>${auto.color}</td>
-                    		<td>${auto.usuario.nombre} ${auto.usuario.apellido}</td>
-                    	</tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <br>
+		<form action="/usuario/editar" method="post" enctype="multipart/form-data">
+				<input type="hidden" value="${usuario.id}" name="id">
+		        <label for="nombre" class="form-label">Nombre:</label>
+		        <input type="text" class="form-control" value="${usuario.nombre}" name="nombre" placeholder="Ingresa nombre">
+		        <br>
+		        <label for="apellido" class="form-label">Apellido:</label>
+		        <input type="text" class="form-control" value="${usuario.apellido}" name="apellido" placeholder="Ingresa apellido">
+		        <br>
+		        <label for="nick" class="form-label">Nick:</label>
+		        <input type="text" class="form-control" value="${usuario.nick}" name="nick" placeholder="Ingresa Nick">
+		        <br>
+		        <label for="pass" class="form-label">Password:</label>
+		        <input type="password" class="form-control"  name="pass" placeholder="Ingrese password">
+		        <br>
+		        <label for="pass2" class="form-label">Confirme Password:</label>
+		        <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Ingrese password">
+		        <br>
+		        <label for="foto" class="form-label">Foto:</label>
+		        <input type="file" class="form-control" value="${usuario.foto}" name="foto" placeholder="cargar foto">
+		        <br>
+		        <input type="submit" class="btn btn-outline-primary btn-lg" value="Actualizar">
+		     
+		    </form>
+           
 			
         </div>
 

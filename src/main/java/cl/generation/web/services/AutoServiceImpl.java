@@ -32,6 +32,9 @@ public class AutoServiceImpl implements AutoService{
 		
 		return autoRepository.findByMarca(marca);
 	}
+	public void eliminarAuto(Long id) {
+		autoRepository.deleteById(id);
+	}
 
 
 }

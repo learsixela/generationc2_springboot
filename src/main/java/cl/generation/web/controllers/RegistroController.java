@@ -1,5 +1,7 @@
 package cl.generation.web.controllers;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import cl.generation.web.models.Usuario;
 import cl.generation.web.services.UsuarioServiceImpl;
@@ -49,10 +52,14 @@ public class RegistroController {
 			@RequestParam("correo") String correo,
 			@RequestParam("pass") String pass,
 			@RequestParam("pass2") String pass2,
+			final @RequestParam("foto") MultipartFile foto,
 			Model model
-			) {
+			) throws IOException {
 		//equals es para comparar String; == 
 		if(pass.equals(pass2)) {
+			//foto
+			byte[] imagenFoto = foto.getBytes();
+			
 			//instanciar un objeto usuario
 			Usuario usuario = new Usuario();
 			usuario.setNombre(nombre);
@@ -61,6 +68,7 @@ public class RegistroController {
 			usuario.setPassword(pass);
 			usuario.setNick(nick);
 			usuario.setPassword2(pass2);
+			usuario.setFoto(imagenFoto);
 			//enviar a base datos
 			Boolean resultado = usuarioServiceImpl.guardarUsuario(usuario);
 			if(resultado) {//si es verdadero
@@ -102,6 +110,7 @@ public class RegistroController {
 			session.setAttribute("usuarioEmail", email);
 			session.setAttribute("usuarioRol", usuario.getRoles());
 			session.setAttribute("usuarioNombre", usuario.getNombre()+" " + usuario.getApellido());
+			session.setAttribute("foto", usuario.getFoto());
 			
 			//ir a una ruta interna http://localhost:8080/home
 			return "redirect:/home";

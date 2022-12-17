@@ -62,6 +62,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Boolean existe = usuarioRepository.existsById(usuario.getId());
 		
 		if(existe) {
+			String passHashed = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
+			//reemplazando el valor por el hash
+			usuario.setPassword(passHashed);
 			usuarioRepository.save(usuario);
 			return "Usuario actualizado";
 		}

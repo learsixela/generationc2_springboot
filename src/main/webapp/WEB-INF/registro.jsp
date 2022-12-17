@@ -28,7 +28,7 @@
     
 	    <div class="card">
 		  <div class="card-body">
-		    <form action="/registro/usuario" method="post">
+		    <form action="/registro/usuario" method="post" enctype="multipart/form-data">
 		        <label for="nombre" class="form-label">Nombre:</label>
 		        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa nombre">
 		        <br>
@@ -46,6 +46,9 @@
 		        <br>
 		        <label for="pass2" class="form-label">Confirme Password:</label>
 		        <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Ingrese password">
+		        <br>
+		        <label for="foto" class="form-label">Foto:</label>
+		        <input type="file" class="form-control" id="foto" name="foto" placeholder="cargar foto">
 		        <br>
 		        <input type="submit" class="btn btn-outline-primary btn-lg" value="Enviar">
 		        <a class="btn btn-primary" href="/registro/login" role="button">Login</a>

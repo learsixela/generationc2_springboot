@@ -1,6 +1,7 @@
 package cl.generation.web.controllers;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,13 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cl.generation.web.models.Auto;
+import cl.generation.web.models.Usuario;
 import cl.generation.web.services.AutoServiceImpl;
+import cl.generation.web.services.UsuarioServiceImpl;
 
 @Controller
 @RequestMapping("/home")
 public class HomeController {
 	@Autowired
 	AutoServiceImpl autoServiceImpl;
+	
+	@Autowired
+	UsuarioServiceImpl usuarioServiceImpl;
 	
 //localhost:9080/home
 	@GetMapping("")
@@ -31,7 +37,6 @@ public class HomeController {
 			//capturando variables de session
 			String email = (String) session.getAttribute("usuarioEmail");
 			Long usuarioId = (Long) session.getAttribute("usuarioId");
-			String nombre = (String) session.getAttribute("usuarioNombre");
 			
 			//obtener y almacenar en variable
 			List<Auto> listaAutos= autoServiceImpl.listarAutos();
@@ -41,7 +46,17 @@ public class HomeController {
 			List<Auto> listaSelectAutos= autoServiceImpl.listarAutos();
 			model.addAttribute("listaSelectAutos", listaSelectAutos);
 			
-			model.addAttribute("usuarioNombre", nombre);
+			Usuario usuario= usuarioServiceImpl.obtenerUsuario(usuarioId);
+			
+			model.addAttribute("usuarioNombre", usuario.getNombre());
+			
+			String foto = "";
+			byte[] imagenFoto = (byte[]) usuario.getFoto();
+			if(imagenFoto!= null) {
+				foto = Base64.getEncoder().encodeToString(imagenFoto);
+			}
+			model.addAttribute("foto", foto);
+			
 			return "home.jsp";
 			
 		}else {
