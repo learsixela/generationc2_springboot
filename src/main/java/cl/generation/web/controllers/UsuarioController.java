@@ -1,6 +1,7 @@
 package cl.generation.web.controllers;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cl.generation.web.models.Rol;
 import cl.generation.web.models.Usuario;
@@ -59,6 +61,13 @@ public class UsuarioController {
 			Long usuarioId = (Long) session.getAttribute("usuarioId");
 			Usuario usuario= usuarioServiceImpl.obtenerUsuario(usuarioId);
 			model.addAttribute("usuario", usuario);
+			String foto = "";
+			byte[] imagenFoto = (byte[]) usuario.getFoto();
+			if(imagenFoto!= null) {
+				foto = Base64.getEncoder().encodeToString(imagenFoto);
+			}
+			model.addAttribute("foto", foto);
+			model.addAttribute("usuarioNombre", usuario.getNombre());
 		}
 		
 		return "editarUsuario.jsp";
@@ -74,6 +83,7 @@ public class UsuarioController {
 			final @RequestParam("foto") MultipartFile foto,
 			HttpSession session,
 			Model model
+			,RedirectAttributes redirectAttr
 			) throws IOException {
 		
 		if(session.getAttribute("usuarioId")!=null) {
@@ -89,6 +99,7 @@ public class UsuarioController {
 			//enviar a base datos
 			String resultado = usuarioServiceImpl.actualizarUsuario(usuario);
 			System.out.println(resultado);
+			redirectAttr.addAttribute("usuario", usuario);
 			return "redirect:/home";
 		}
 		
