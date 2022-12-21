@@ -9,4 +9,6 @@ public interface AutoService {
 	public List<Auto> listarAutos();
 	public Auto obtenerAuto(Long id);
 	public Auto obtenerAutoNombre(String marca);
+	
+	public List<Auto> findAllByUsuario(Long id);
 }

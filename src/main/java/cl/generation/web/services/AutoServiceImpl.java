@@ -35,6 +35,11 @@ public class AutoServiceImpl implements AutoService{
 	public void eliminarAuto(Long id) {
 		autoRepository.deleteById(id);
 	}
+	@Override
+	public List<Auto> findAllByUsuario(Long id) {
+		return autoRepository.findAllByUsuario(id);
+	}
 
 
+	
 }
